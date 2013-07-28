@@ -19,10 +19,19 @@ class ExceptionHookManager {
             $args = func_get_args();
             $Exception = $args[1];
 
+            $Run = new \Whoops\Run();
+            $PageHandler = new \Whoops\Handler\PrettyPageHandler();
+
             if ($args[0] instanceof SugarBean)
             {
-                $focus = $args[0]; //@todo add bean table to PageHandler
+                $focus = $args[0];
                 $Exception = $args[2];
+
+                if ($this->showBean())
+                {
+                    $data = $this->getBeanData($focus);
+                    $PageHandler->addDataTable('SugarBean', $data);
+                }
             }
 
             if (! $Exception instanceof Exception)
@@ -30,8 +39,7 @@ class ExceptionHookManager {
                 $Exception = new Exception('Exception not passed to hook!');
             }
 
-            $Run = new \Whoops\Run();
-            $Run->pushHandler(new Whoops\Handler\PrettyPageHandler());
+            $Run->pushHandler($PageHandler);
             $Run->handleException($Exception);
         }
     }
@@ -62,6 +70,36 @@ class ExceptionHookManager {
     private function isDev()
     {
         return SugarConfig::getInstance()->get('whoops_dev', false);
+    }
+
+    /**
+     * Returns fields for use in datatable on Page Handler
+     * @param SugarBean $focus
+     * @return array
+     */
+    protected function getBeanData(SugarBean $focus)
+    {
+        $data = array();
+
+        foreach($focus->field_name_map as $fieldMap)
+        {
+            if ($fieldMap['type'] !== 'link')
+            {
+                $field = $fieldMap['name'];
+                $data[$field] = $focus->$field;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Checks config to allow SugarBean to be added as data table
+     * @return bool
+     */
+    private function showBean()
+    {
+        return SugarConfig::getInstance()->get('whoops_show_bean', true);
     }
 
 }
