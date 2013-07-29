@@ -1,7 +1,7 @@
-SugarCRMWhoops
+SugarCRM Whoops
 ==============
 
-Whoops Exceptions and Error Pages for SugarCRM development
+[Whoops](http://filp.github.io/whoops/ "Whoops") Exceptions and Error Pages for SugarCRM development
 
 This is a tool for developing on the SugarCRM platform. This package is intended for local development
 purposes only, and should not be used on-demand.
