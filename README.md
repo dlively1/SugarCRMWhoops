@@ -19,3 +19,6 @@ All changes are made using the config_override.php file in the root directory of
 $sugar_config['whoops_dev'] = true; #Activate Whoops Handlers 
 $sugar_config['whoops_show_bean'] = true; #Show SugarBean DataTable in the PrettyPageHandler
 ```
+
+
+Download the installer package [Version 1.0](https://dl.dropboxusercontent.com/u/11285576/SugarCRMWhoops_v1_0_0.zip)
