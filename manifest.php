@@ -4,7 +4,7 @@
 $manifest = array(
     'acceptable_sugar_flavors' => array('CE', 'PRO', 'CORP', 'ENT', 'ULT'),
     'acceptable_sugar_versions' => array(
-
+		'regex_matches' => array ('6\\.5\\.(.*?)', '6\\.6\\.(.*?)', '6\\.6\\.(.*?)\\.(.*?)', '6\\.7\\.(.*?)', '6\\.7\\.(.*?)\\.(.*?)'),
     ),
     'readme' => '',
     'author' => 'Dan Lively',
